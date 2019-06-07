@@ -124,31 +124,32 @@ parts:
     prime:
     - -*
 
+  # Check out the tagged release revision if it isn't promoted to the stable channel
+  # https://forum.snapcraft.io/t/selective-checkout-check-out-the-tagged-release-revision-if-it-isnt-promoted-to-the-stable-channel/10617
+  selective-checkout:
+    plugin: nil
+    build-packages:
+    - git
+    stage-snaps:
+    - selective-checkout
+    prime:
+    - -*
+
   main:
     after:
-    # for patch-desktop-entries.*
     - patching
+    - selective-checkout
 
-    # for override-pull script
-    - scriptlets
-
-    source: .
-    #source-type:
-    #source-branch:
-    #source-tag:
-    #source-depth:
+    source: https://github.com/tsujan/FeatherPad.git
+    source-depth: 75
     override-pull: |
       set -o nounset
 
       snapcraftctl pull
 
-      "${SNAPCRAFT_STAGE}"/scriptlets/main-adopt-info
-
-    plugin: dump
-    organize:
-      featherpad: bin/
-    stage:
-    - bin/*
+      "$SNAPCRAFT_STAGE"/scriptlets/selective-checkout \
+        --append-packaging-revision \
+        --release-tag-prefix=V
 
     override-prime: |
       set \
