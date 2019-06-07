@@ -69,6 +69,10 @@ license: GPL-3.0
 # https://forum.snapcraft.io/t/extracting-information-from-sources-in-snapcraft-parts/4642
 adopt-info: main
 
+architectures:
+# The kde-frameworks-5-core18 content snap currently only available in amd64
+- build-on: amd64
+
 # Snapd feature set and version the snap requires in order to work
 # https://forum.snapcraft.io/t/snapcraft-top-level-metadata/8334#heading--assumes
 assumes:
@@ -135,6 +139,12 @@ parts:
     prime:
     - -*
 
+  # Launchers etc.
+  kde-frameworks-5-env:
+    source: https://github.com/apachelogger/kf5-snap-env.git
+    source-depth: 1
+    plugin: dump
+
   main:
     after:
     - patching
@@ -151,6 +161,11 @@ parts:
         --append-packaging-revision \
         --release-tag-prefix=V
 
+    plugin: cmake
+    build-packages:
+    - g++
+    build-snaps:
+    - kde-frameworks-5-core18-sdk
     override-prime: |
       set \
         -o nounset
@@ -175,7 +190,7 @@ apps:
 
     # The commands that are run, in order, before running the one specified by the `command` key
     command-chain:
-    - bin/desktop-launch
+    - kf5-launch
     - bin/featherpad-launch
 
     # If the providing part of the app. has a desktop entry, specify its path relative to the `prime` directory.
@@ -196,6 +211,13 @@ plugs:
   unity7:
   wayland:
 
+  # Qt and KDE runtime from KDE neon
+  kde-frameworks-5-plug:
+    content: kde-frameworks-5-core18-all
+    interface: content
+    default-provider: kde-frameworks-5-core18
+    target: kf5
+
   # Gtk Common Themes support
   # https://forum.snapcraft.io/t/how-to-use-the-system-gtk-theme-via-the-gtk-common-themes-snap/6235
   gsettings:
@@ -213,8 +235,8 @@ plugs:
     default-provider: gtk-common-themes
 
   # Regular files access
-  #home:
-  #removable-media: # Non-A/C
+  home:
+  removable-media: # Non-A/C
 
   # Application-specific files access
   # The auto-connection requires store grant
