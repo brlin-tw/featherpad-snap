@@ -3,7 +3,7 @@
 	Use the Staticaly service for easy access to in-repo pictures:
 	https://www.staticaly.com/
 -->
-![Icon of FeatherPad](gui/featherpad.svg "Icon of FeatherPad")
+<img src=gui/featherpad.svg alt='Icon of FeatherPad' style='width: 256px' title='Icon of FeatherPad' />
 
 **This is the unofficial snap for FeatherPad**, *"Lightweight Qt5 Plain-Text Editor for Linux"*. It works on Ubuntu, Fedora, Debian, and other major Linux distributions.
 
