@@ -17,7 +17,7 @@
 # All following comments, including this one, are designed to be stripped
 # before contributing the recipe to the upstream
 name: featherpad
-title: FeatherPad
+title: FeatherPad (UNOFFICIAL)
 summary: Lightweight Qt5 Plain-Text Editor for Linux
 description: |
   FeatherPad (by Pedram Pourang, a.k.a. Tsu Jan <tsujan2000@gmail.com>) is a lightweight Qt5 plain-text editor for Linux. It is independent of any desktop environment and has:
