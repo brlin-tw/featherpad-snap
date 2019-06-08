@@ -33,13 +33,18 @@ Published for <img src="http://anything.codes/slack-emoji-for-techies/emoji/tux.
 ### The Graphical Way
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/featherpad)
 
-<!-- Uncomment when you have test results
 ## What is Working
-* [A list of functionallities that are verified working]
+* Launch application
+* Load/Save file
+* I18N
+* Syntax highlighting
+* Showing help text
+* About dialog
+* Showing line number
+* Changing editor font
 
 ## What is NOT Working...yet 
 Check out the [issue tracker](https://github.com/Lin-Buo-Ren/featherpad-snap/issues) for known issues.
--->
 
 ## Support
 * Report issues regarding using this snap to the issue tracker:  
