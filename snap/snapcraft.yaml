@@ -158,6 +158,7 @@ parts:
     - fcitx-frontend-qt5
     - qt5-gtk-platformtheme
 
+  # https://github.com/tsujan/FeatherPad/blob/master/INSTALL
   main:
     after:
     - patching
