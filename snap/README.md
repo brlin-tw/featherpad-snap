@@ -7,9 +7,7 @@
 
 **This is the unofficial snap for FeatherPad**, *"Lightweight Qt5 Plain-Text Editor for Linux"*. It works on Ubuntu, Fedora, Debian, and other major Linux distributions.
 
-<!-- Uncomment and modify this when you are provided a build status badge
-[![Build Status Badge of the `featherpad` Snap](https://build.snapcraft.io/badge/Lin-Buo-Ren/featherpad-snap.svg "Build Status of the `featherpad` snap")](https://build.snapcraft.io/user/Lin-Buo-Ren/featherpad-snap)
--->
+[![Build Status Badge of the `featherpad` Snap](https://build.snapcraft.io/badge/Lin-Buo-Ren/featherpad-snap.svg" Build Status of the `featherpad` snap")](https://build.snapcraft.io/user/Lin-Buo-Ren/featherpad-snap)
 
 ![Screenshot of the Snapped Application](local/screenshots/main-interface.png"Screenshot of the Snapped Application")
 
