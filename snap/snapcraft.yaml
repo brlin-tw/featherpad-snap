@@ -178,15 +178,26 @@ parts:
     plugin: cmake
     build-packages:
     - g++
+    - libhunspell-dev
     - libqt5svg5-dev
     - libqt5x11extras5-dev
+    - libx11-dev
+    - libxext-dev
     - mesa-common-dev
     - qtbase5-dev
+    - qttools5-dev-tools
     stage-packages:
     - libgl1
+    - libhunspell-1.6-0
+    - libqt5core5a
+    - libqt5gui5
+    - libqt5network5
     - libqt5printsupport5
     - libqt5svg5
+    - libqt5widgets5
     - libqt5x11extras5
+    - libx11-6
+    - libxext6
     override-prime: |
       set \
         -o nounset
