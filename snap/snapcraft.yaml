@@ -69,10 +69,6 @@ license: GPL-3.0
 # https://forum.snapcraft.io/t/extracting-information-from-sources-in-snapcraft-parts/4642
 adopt-info: main
 
-architectures:
-# The kde-frameworks-5-core18 content snap currently only available in amd64
-- build-on: amd64
-
 # Snapd feature set and version the snap requires in order to work
 # https://forum.snapcraft.io/t/snapcraft-top-level-metadata/8334#heading--assumes
 assumes:
@@ -139,11 +135,32 @@ parts:
     prime:
     - -*
 
-  # Launchers etc.
-  kde-frameworks-5-env:
-    source: https://github.com/apachelogger/kf5-snap-env.git
+  # ubuntu/snapcraft-desktop-helpers: Various launchers for snapcraft wiki parts
+  # https://github.com/ubuntu/snapcraft-desktop-helpers
+  desktop-qt5:
+    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
     source-depth: 1
-    plugin: dump
+    source-subdir: qt
+    plugin: make
+    make-parameters: ["FLAVOR=qt5"]
+    build-packages:
+    - dpkg-dev
+    stage-packages:
+    - libxkbcommon0
+    - ttf-ubuntu-font-family
+    - dmz-cursor-theme
+    - light-themes
+    - adwaita-icon-theme
+    - gnome-themes-standard
+    - shared-mime-info
+    - libqt5gui5
+    - libgdk-pixbuf2.0-0
+    - libqt5svg5 # for loading icon themes which are svg
+    - try: [appmenu-qt5] # not available on core18
+    - locales-all
+    - xdg-user-dirs
+    - fcitx-frontend-qt5
+    - qt5-gtk-platformtheme
 
   main:
     after:
@@ -164,8 +181,15 @@ parts:
     plugin: cmake
     build-packages:
     - g++
-    build-snaps:
-    - kde-frameworks-5-core18-sdk
+    - libqt5svg5-dev
+    - libqt5x11extras5-dev
+    - mesa-common-dev
+    - qtbase5-dev
+    stage-packages:
+    - libgl1
+    - libqt5printsupport5
+    - libqt5svg5
+    - libqt5x11extras5
     override-prime: |
       set \
         -o nounset
@@ -190,12 +214,19 @@ apps:
 
     # The commands that are run, in order, before running the one specified by the `command` key
     command-chain:
-    - kf5-launch
+    - bin/desktop-launch
     - bin/featherpad-launch
 
     # If the providing part of the app. has a desktop entry, specify its path relative to the `prime` directory.
     # If the packaging target doesn't provide a desktop entry, ignore the `desktop` key and implement a desktop entry in `/snap/gui`
     desktop: share/applications/featherpad.desktop
+
+    environment:
+      # gtk-common-themes support
+      QT_QPA_PLATFORMTHEME: gtk3
+
+      # Fix-up compose related error
+      QT_XKB_CONFIG_ROOT: $SNAP/usr/share/X11/xkb
 
 # Refer the following documentation for asserting interface plugs and slots in a security confined snap:
 # Interface management - doc - snapcraft.io
@@ -210,13 +241,6 @@ plugs:
   desktop-legacy:
   unity7:
   wayland:
-
-  # Qt and KDE runtime from KDE neon
-  kde-frameworks-5-plug:
-    content: kde-frameworks-5-core18-all
-    interface: content
-    default-provider: kde-frameworks-5-core18
-    target: kf5
 
   # Gtk Common Themes support
   # https://forum.snapcraft.io/t/how-to-use-the-system-gtk-theme-via-the-gtk-common-themes-snap/6235
@@ -237,6 +261,9 @@ plugs:
   # Regular files access
   home:
   removable-media: # Non-A/C
+
+  # Eliminate Qt non-fatal error message
+  opengl:
 
   # Application-specific files access
   # The auto-connection requires store grant
