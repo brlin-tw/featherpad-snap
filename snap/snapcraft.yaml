@@ -184,6 +184,7 @@ parts:
     - libx11-dev
     - libxext-dev
     - mesa-common-dev
+    - pkg-config
     - qtbase5-dev
     - qttools5-dev
     - qttools5-dev-tools
