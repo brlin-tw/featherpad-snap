@@ -198,6 +198,13 @@ parts:
     - libqt5x11extras5
     - libx11-6
     - libxext6
+    configflags:
+    # Fix-up application data locating (i.e. help file)
+    # DISABLED: Although DATADIR is defined in the upstream source, it isn't really used
+    #- -DDATADIR=/snap/$SNAPCRAFT_PROJECT_NAME/current/share
+    - -DCMAKE_INSTALL_PREFIX=/snap/$SNAPCRAFT_PROJECT_NAME/current
+    organize:
+      snap/$SNAPCRAFT_PROJECT_NAME/current/: /
     override-prime: |
       set \
         -o nounset
