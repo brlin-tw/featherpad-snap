@@ -185,6 +185,7 @@ parts:
     - libxext-dev
     - mesa-common-dev
     - qtbase5-dev
+    - qttools5-dev
     - qttools5-dev-tools
     stage-packages:
     - libgl1
