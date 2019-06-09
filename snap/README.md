@@ -18,8 +18,7 @@ Published for <img src="http://anything.codes/slack-emoji-for-techies/emoji/tux.
 
 ### In a Terminal
     # Install the snap #
-    sudo snap install --channel=beta featherpad
-    #sudo snap install featherpad
+    sudo snap install featherpad
     
     # Connect the snap to optional security confinement interfaces #
     ## For loading/saving files under `/mnt` and `/media` ##
