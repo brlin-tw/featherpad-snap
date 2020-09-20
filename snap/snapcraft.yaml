@@ -245,6 +245,10 @@ apps:
       # Fix-up compose related error
       QT_XKB_CONFIG_ROOT: $SNAP/usr/share/X11/xkb
 
+      # Workaround launching in Wayland
+      # FIXME: Proper Wayland integration should be used instead
+      DISABLE_WAYLAND: 1
+
 # Refer the following documentation for asserting interface plugs and slots in a security confined snap:
 # Interface management - doc - snapcraft.io
 # https://docs.snapcraft.io/interface-management/6154
