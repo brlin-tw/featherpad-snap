@@ -72,7 +72,7 @@ adopt-info: main
 # Snapd feature set and version the snap requires in order to work
 # https://forum.snapcraft.io/t/snapcraft-top-level-metadata/8334#heading--assumes
 assumes:
-- command-chain
+  - command-chain
 
 # Base runtime
 # The common runtime for the snap to run on, or `bare` for static linked applications
@@ -104,7 +104,7 @@ parts:
     organize:
       '*': patching/
     prime:
-    - -*
+      - -*
 
   # Launcher programs to fix problems at runtime
   launchers:
@@ -113,7 +113,7 @@ parts:
     organize:
       '*': bin/
     stage:
-    - -bin/README.*
+      - -bin/README.*
 
   # Programs to modify the behavior of each step of the snapcraft lifecycles
   scriptlets:
@@ -122,18 +122,18 @@ parts:
     organize:
       '*': scriptlets/
     prime:
-    - -*
+      - -*
 
   # Check out the tagged release revision if it isn't promoted to the stable channel
   # https://forum.snapcraft.io/t/selective-checkout-check-out-the-tagged-release-revision-if-it-isnt-promoted-to-the-stable-channel/10617
   selective-checkout:
     plugin: nil
     build-packages:
-    - git
+      - git
     stage-snaps:
-    - selective-checkout
+      - selective-checkout
     prime:
-    - -*
+      - -*
 
   # ubuntu/snapcraft-desktop-helpers: Various launchers for snapcraft wiki parts
   # https://github.com/ubuntu/snapcraft-desktop-helpers
@@ -144,25 +144,25 @@ parts:
     plugin: make
     make-parameters: ["FLAVOR=qt5"]
     build-packages:
-    - dpkg-dev
+      - dpkg-dev
     stage-packages:
-    - libxkbcommon0
-    - ttf-ubuntu-font-family
-    - shared-mime-info
-    - libqt5gui5
-    - libgdk-pixbuf2.0-0
-    - libqt5svg5 # for loading icon themes which are svg
-    - try: [appmenu-qt5] # not available on core18
-    - locales-all
-    - xdg-user-dirs
-    - fcitx-frontend-qt5
-    - qt5-gtk-platformtheme
+      - libxkbcommon0
+      - ttf-ubuntu-font-family
+      - shared-mime-info
+      - libqt5gui5
+      - libgdk-pixbuf2.0-0
+      - libqt5svg5 # for loading icon themes which are svg
+      - try: [appmenu-qt5] # not available on core18
+      - locales-all
+      - xdg-user-dirs
+      - fcitx-frontend-qt5
+      - qt5-gtk-platformtheme
 
   # https://github.com/tsujan/FeatherPad/blob/master/INSTALL
   main:
     after:
-    - patching
-    - selective-checkout
+      - patching
+      - selective-checkout
 
     source: https://github.com/tsujan/FeatherPad.git
     source-depth: 75
@@ -177,34 +177,34 @@ parts:
 
     plugin: cmake
     build-packages:
-    - g++
-    - libhunspell-dev
-    - libqt5svg5-dev
-    - libqt5x11extras5-dev
-    - libx11-dev
-    - libxext-dev
-    - mesa-common-dev
-    - pkg-config
-    - qtbase5-dev
-    - qttools5-dev
-    - qttools5-dev-tools
+      - g++
+      - libhunspell-dev
+      - libqt5svg5-dev
+      - libqt5x11extras5-dev
+      - libx11-dev
+      - libxext-dev
+      - mesa-common-dev
+      - pkg-config
+      - qtbase5-dev
+      - qttools5-dev
+      - qttools5-dev-tools
     stage-packages:
-    - libgl1
-    - libhunspell-1.6-0
-    - libqt5core5a
-    - libqt5gui5
-    - libqt5network5
-    - libqt5printsupport5
-    - libqt5svg5
-    - libqt5widgets5
-    - libqt5x11extras5
-    - libx11-6
-    - libxext6
+      - libgl1
+      - libhunspell-1.6-0
+      - libqt5core5a
+      - libqt5gui5
+      - libqt5network5
+      - libqt5printsupport5
+      - libqt5svg5
+      - libqt5widgets5
+      - libqt5x11extras5
+      - libx11-6
+      - libxext6
     configflags:
-    # Fix-up application data locating (i.e. help file)
-    # DISABLED: Although DATADIR is defined in the upstream source, it isn't really used
-    #- -DDATADIR=/snap/$SNAPCRAFT_PROJECT_NAME/current/share
-    - -DCMAKE_INSTALL_PREFIX=/snap/$SNAPCRAFT_PROJECT_NAME/current
+      # Fix-up application data locating (i.e. help file)
+      # DISABLED: Although DATADIR is defined in the upstream source, it isn't really used
+      #- -DDATADIR=/snap/$SNAPCRAFT_PROJECT_NAME/current/share
+      - -DCMAKE_INSTALL_PREFIX=/snap/$SNAPCRAFT_PROJECT_NAME/current
     organize:
       snap/$SNAPCRAFT_PROJECT_NAME/current/: /
     override-prime: |
@@ -231,8 +231,8 @@ apps:
 
     # The commands that are run, in order, before running the one specified by the `command` key
     command-chain:
-    - bin/desktop-launch
-    - bin/featherpad-launch
+      - bin/desktop-launch
+      - bin/featherpad-launch
 
     # If the providing part of the app. has a desktop entry, specify its path relative to the `prime` directory.
     # If the packaging target doesn't provide a desktop entry, ignore the `desktop` key and implement a desktop entry in `/snap/gui`
@@ -289,11 +289,11 @@ plugs:
   #user-wide-configs:
     #interface: personal-files
     #read:
-    #- $HOME/.config/featherpad
+      #- $HOME/.config/featherpad
   #system-wide-configs:
     #interface: system-files
     #read:
-    #- /etc/featherpad
+      #- /etc/featherpad
 
   # Network access
   #network:
