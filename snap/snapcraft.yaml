@@ -250,9 +250,6 @@ apps:
       # gtk-common-themes support
       QT_QPA_PLATFORMTHEME: gtk3
 
-      # Fix-up compose related error
-      QT_XKB_CONFIG_ROOT: $SNAP/usr/share/X11/xkb
-
       # Workaround launching in Wayland
       # FIXME: Proper Wayland integration should be used instead
       DISABLE_WAYLAND: 1
@@ -311,3 +308,7 @@ plugs:
   #network:
 
 #slots:
+
+layout:
+  /usr/share/X11/locale:
+    symlink: $SNAP/usr/share/X11/locale
