@@ -11,5 +11,20 @@ set \
 
 #export IMPORTANT_ENVIRONMENT_VARIABLE=value
 
+if test "$(snapctl get silent-unofficial-notice)" == no; then
+    qarma \
+        --width=720 \
+        --title 'Notice from the unofficial Featherpad snap' \
+        --info \
+            --text "Hello!<br><br>Just before launching the application we would like to let you know that this is an unofficial distribution of Featherpad published by <a href=\"https://Lin-Buo-Ren.github.io\">林博仁(Buo-ren, Lin)</a>.  Please file any issues regarding the use of the snap to <a href=\"https://github.com/Lin-Buo-Ren/featherpad-snap/issues\">the snap's issue tracker</a>, thank you!<br><br>To silent this message run the following command in the terminal:<br><br>    <tt>sudo snap set ${SNAP_NAME} silent-unofficial-notice=yes</tt><br><br>" \
+            --selectable-labels
+fi
+
 # Finally run the next part of the command chain
-exec "${@}"
+"${@}" ||
+    qarma \
+        --width=720 \
+        --title 'Notice from the unofficial Featherpad snap' \
+        --info \
+            --text "Hello!<br><br>  It appears that Featherpad stops prematurely, if you believe this is a defect please file an issue at <a href=\"https://github.com/Lin-Buo-Ren/featherpad-snap/issues\">the snap's issue tracker</a>, thank you!" \
+            --selectable-labels

@@ -166,6 +166,18 @@ parts:
 
       - qt5-gtk-platformtheme
 
+  qarma:
+    source: https://github.com/luebking/qarma.git
+    source-commit: 923b25bcfbaf0ee3752d0d284b6d3a40a2ecebc3
+    plugin: qmake
+    build-packages:
+    - g++
+    - libqt5x11extras5-dev
+    - qtbase5-dev
+    stage-packages:
+    - libqt5core5a
+    - libqt5x11extras5
+
   # https://github.com/tsujan/FeatherPad/blob/master/INSTALL
   main:
     after:

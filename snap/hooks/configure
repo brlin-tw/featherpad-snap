@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+# Configure hook for configuring snap options
+set \
+    -e \
+    -u
+
+option_silent_notice="$(snapctl get silent-unofficial-notice)"
+if \
+    test -n "${option_silent_notice}" \
+        && ! {
+            test "${option_silent_notice}" = no \
+                || test "${option_silent_notice}" = yes
+        }; then
+    printf -- \
+        'Error: Invalid value.  "yes" or "no" is required.\n' \
+        1>&2
+    exit 1
+fi
+
+# Set default option values
+if test -z "${option_silent_notice}"; then
+    snapctl set silent-unofficial-notice=no
+fi
