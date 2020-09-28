@@ -169,6 +169,15 @@ parts:
     - libqt5core5a
     - libqt5x11extras5
 
+  # The session-manager-workaround launcher: Silent error messages due to inaccessible paths
+  # https://forum.snapcraft.io/t/the-session-manager-workaround-launcher-silent-error-messages-due-to-inaccessible-paths/20252
+  session-manager-workaround:
+    source: https://github.com/Lin-Buo-Ren/session-manager-workaround-launch.git
+    source-tag: v1.0.0
+    plugin: dump
+    stage:
+      - bin/*
+
   # https://github.com/tsujan/FeatherPad/blob/master/INSTALL
   main:
     after:
@@ -242,6 +251,7 @@ apps:
 
     # The commands that are run, in order, before running the one specified by the `command` key
     command-chain:
+      - bin/session-manager-workaround
       - bin/desktop-launch
       - bin/featherpad-launch
 
