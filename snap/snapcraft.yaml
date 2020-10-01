@@ -44,7 +44,11 @@ description: |
 
   **Snap-specific information**
 
-  This snap is NOT an official distribution of FeatherPad, refer [the snap's own issue tracker](https://github.com/Lin-Buo-Ren/featherpad-snap/issues) for support.
+  This snap is NOT an official distribution of FeatherPad, refer the snap's own issue tracker for support:
+
+      https://github.com/Lin-Buo-Ren/featherpad-snap/issues
+
+  Please DO NOT file issue on the upstream project's issue tracker, as the upstream isn't responsible of the snap distribution.
 
 # The path of icon to represent the snap, relative to the source tree directory
 # Only PNG or SVG image is supported, dimension must be greater than 256x256px
