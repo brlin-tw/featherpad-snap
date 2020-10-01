@@ -159,6 +159,7 @@ parts:
       ## (Hopefully) Fix Fcitx integration
       - fcitx-frontend-qt5
 
+      ## For better theming compatibility
       - qt5-gtk-platformtheme
 
   qarma:
