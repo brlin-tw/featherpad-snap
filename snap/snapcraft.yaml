@@ -301,6 +301,13 @@ plugs:
   home:
   removable-media: # Non-A/C
 
+  # Allow the application to use spellchecking dictionaries from the content snaps
+  # https://forum.snapcraft.io/t/the-hunspell-dictionaries-content-snaps/7160/4
+  hunspell-dictionaries:
+    interface: content
+    default-provider: hunspell-dictionaries-1-6-1804
+    target: $SNAP/usr/share/hunspell
+
   # Eliminate Qt non-fatal error message
   opengl:
 
