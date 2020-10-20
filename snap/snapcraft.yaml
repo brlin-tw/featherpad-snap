@@ -324,11 +324,14 @@ plugs:
   # The auto-connection requires store grant
   # https://forum.snapcraft.io/t/the-personal-files-interface/9357
   # https://forum.snapcraft.io/t/the-system-files-interface/9358
-  #user-wide-configs:
-    #interface: personal-files
-    #read:
-      #- $HOME/.config/featherpad
-  #system-wide-configs:
+  # https://github.com/tsujan/FeatherPad/blob/ac3e5104/featherpad/config.cpp#L89
+  # QSettings Class | Qt Core 5.15.1
+  # https://doc.qt.io/qt-5/qsettings.html#setPath
+  dot-config-featherpad:
+    interface: personal-files
+    read:
+      - $HOME/.config/featherpad
+  #config-featherpad:
     #interface: system-files
     #read:
       #- /etc/featherpad
