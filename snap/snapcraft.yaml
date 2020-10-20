@@ -330,7 +330,7 @@ plugs:
   dot-config-featherpad:
     interface: personal-files
     read:
-      - $HOME/.config/featherpad
+      - $HOME/.config/featherpad/fp.conf
   #config-featherpad:
     #interface: system-files
     #read:
