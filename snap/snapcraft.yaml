@@ -1,0 +1,146 @@
+name: featherpad
+base: core22
+adopt-info: featherpad
+grade: stable
+confinement: strict
+compression: lzo
+architectures:
+  - build-on: amd64
+
+layout:
+  /usr/share/X11:
+    symlink: $SNAP/kf5/usr/share/X11
+  /usr/share/qt5:
+    bind: $SNAP/kf5/usr/share/qt5
+        
+package-repositories:
+  - type: apt
+    components: [main]
+    suites: [jammy]
+    key-id: 444DABCF3667D0283F894EDDE6D4736255751E5D
+    url: http://origin.archive.neon.kde.org/user
+    key-server: keyserver.ubuntu.com
+
+environment:
+  SNAP_DESKTOP_RUNTIME: $SNAP/kf5
+  QTWEBENGINEPROCESS_PATH: "$SNAP/kf5/usr/lib/$CRAFT_ARCH_TRIPLET/qt5/libexec/QtWebEngineProcess"
+  QT_PLUGIN_PATH: "$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET/qt5/plugins:$SNAP/kf5/usr/lib/$CRAFT_ARCH_TRIPLET/qt5/plugins/kf5"
+     
+slots:
+  featherpad:
+    interface: dbus
+    bus: session
+    name: org.featherpad.FeatherPad
+    
+plugs:
+  desktop:
+    mount-host-font-cache: false
+  icon-themes:
+    interface: content
+    target: $SNAP/data-dir/icons
+    default-provider: gtk-common-themes
+  sound-themes:
+    interface: content
+    target: $SNAP/data-dir/sounds
+    default-provider: gtk-common-themes
+  kf5-5-106-qt-5-15-9-core22:
+    content: kf5-5-106-qt-5-15-9-core22-all
+    interface: content
+    default-provider: kf5-5-106-qt-5-15-9-core22
+    target: $SNAP/kf5
+
+
+
+apps:
+  featherpad:
+    command: usr/bin/featherpad
+    plugs:
+       - home
+       - desktop
+       - desktop-legacy
+       - opengl
+       - wayland
+       - x11
+       - audio-playback
+       - unity7
+       - network
+       - network-status
+       - network-bind
+       - removable-media
+    environment:
+       HOME: $SNAP_USER_COMMON
+       TMPDIR: $XDG_RUNTIME_DIR   
+    common-id: org.featherpad.FeatherPad
+    desktop: usr/share/applications/featherpad.desktop
+    command-chain:
+       - snap/command-chain/desktop-launch
+
+hooks:
+    configure:
+       plugs:
+         - desktop
+       command-chain:
+         - snap/command-chain/hooks-configure-desktop
+
+
+    
+parts:
+    kde-neon:
+       source: /snap/snapcraft/current/share/snapcraft/extensions/desktop/kde-neon
+       source-type: local
+       plugin: make
+       make-parameters:
+         - PLATFORM_PLUG=kf5-5-106-qt-5-15-9-core22
+       build-snaps:
+         - kf5-5-106-qt-5-15-9-core22-sdk
+       build-environment:
+         - &id001
+              PATH: /snap/kf5-5-106-qt-5-15-9-core22-sdk/current/usr/bin${PATH:+:$PATH}
+         - &id002
+              XDG_DATA_DIRS: $CRAFT_STAGE/usr/share:/snap/kf5-5-106-qt-5-15-9-core22-sdk/current/usr/share:/usr/share${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+         - &id003
+              XDG_CONFIG_HOME: $CRAFT_STAGE/etc/xdg:/snap/kf5-5-106-qt-5-15-9-core22-sdk/current/etc/xdg:/etc/xdg${XDG_CONFIG_HOME:+:$XDG_CONFIG_HOME}
+         - &id004
+              CRAFT_CMAKE_ARGS: -DCMAKE_FIND_ROOT_PATH=/snap/kf5-5-106-qt-5-15-9-core22-sdk/current${CRAFT_CMAKE_ARGS:+:$CRAFT_CMAKE_ARGS}
+    
+    featherpad:
+       source: https://github.com/tsujan/FeatherPad.git
+       source-tag: V1.4.1
+       after: [kde-neon]
+       plugin: cmake
+       parse-info: [usr/share/metainfo/featherpad.metainfo.xml]
+       cmake-parameters:
+         - -DCMAKE_INSTALL_PREFIX=/usr
+         - "-DCMAKE_FIND_ROOT_PATH=/usr\\;$CRAFT_STAGE\\;/snap/kf5-5-106-qt-5-15-9-core22-sdk/current"
+         - "-DKDE_INSTALL_PLUGINDIR=/usr/lib/$CRAFT_ARCH_TRIPLET/qt5/plugins/"
+       build-environment: 
+         - *id001
+         - *id002
+         - *id003
+         - *id004  
+       build-packages:
+         - g++
+         - libx11-dev 
+         - libxext-dev
+         - qtbase5-dev 
+         - libqt5x11extras5-dev
+         - libqt5svg5-dev
+         - libhunspell-dev
+         - qttools5-dev-tools 
+       build-snaps:
+         - cmake
+       override-pull: |
+         craftctl default
+         craftctl set version=$(git describe --tags --abbrev=0 | cut -c 2-)
+      
+    
+    cleanup:
+       after:
+         - kde-neon
+         - featherpad
+       plugin: nil
+       build-snaps:
+         - kf5-5-106-qt-5-15-9-core22-sdk
+       override-prime:  |
+         set -eux
+         # # Unused libraries found by linter
