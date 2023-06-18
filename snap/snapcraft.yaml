@@ -340,7 +340,11 @@ plugs:
   # Network access
   #network:
 
-#slots:
+slots:
+  featherpad:
+    interface: dbus
+    bus: session
+    name: org.featherpad.FeatherPad
 
 layout:
   /usr/share/X11/locale:
