@@ -46,7 +46,7 @@ description: |
 
   This snap is NOT an official distribution of FeatherPad, refer the snap's own issue tracker for support:
 
-      https://github.com/Lin-Buo-Ren/featherpad-snap/issues
+      https://github.com/brlin-tw/featherpad-snap/issues
 
   Please DO NOT file issue on the upstream project's issue tracker, as the upstream isn't responsible of the snap distribution.
 
@@ -181,7 +181,7 @@ parts:
   # The session-manager-workaround launcher: Silent error messages due to inaccessible paths
   # https://forum.snapcraft.io/t/the-session-manager-workaround-launcher-silent-error-messages-due-to-inaccessible-paths/20252
   session-manager-workaround:
-    source: https://github.com/Lin-Buo-Ren/session-manager-workaround-launch.git
+    source: https://github.com/brlin-tw/session-manager-workaround-launch.git
     source-tag: v1.0.0
     plugin: dump
     stage:
