@@ -187,7 +187,6 @@ parts:
     stage:
       - bin/*
 
-  # Refer:
   # https://github.com/tsujan/FeatherPad/blob/master/INSTALL
   main:
     after:
@@ -275,7 +274,7 @@ apps:
 
       # Workaround launching in Wayland
       # FIXME: Proper Wayland integration should be used instead
-      #DISABLE_WAYLAND: 1
+      DISABLE_WAYLAND: 1
 
 # Refer the following documentation for asserting interface plugs and slots in a security confined snap:
 # Interface management - doc - snapcraft.io
