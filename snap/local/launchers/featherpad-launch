@@ -16,7 +16,7 @@ if test "$(snapctl get silent-unofficial-notice)" == no; then
         --width=720 \
         --title 'Notice from the unofficial Featherpad snap' \
         --info \
-            --text "Hello!<br><br>Just before launching the application we would like to let you know that this is an unofficial distribution of Featherpad published by <a href=\"https://Lin-Buo-Ren.github.io\">林博仁(Buo-ren, Lin)</a>.  Please file any issues regarding the use of the snap to <a href=\"https://github.com/Lin-Buo-Ren/featherpad-snap/issues\">the snap's own issue tracker</a>, thank you!<br><br><b>As the upstream project is not responsible to the snap distribution, please DO NOT file issue to the upstream project's issue tracker.</b><br><br>To silent this message run the following command in the terminal:<br><br>    <tt>sudo snap set ${SNAP_NAME} silent-unofficial-notice=yes</tt><br><br>" \
+            --text "Hello!<br><br>Just before launching the application we would like to let you know that this is an unofficial distribution of Featherpad published by <a href=\"https://brlin-tw.github.io\">林博仁(Buo-ren, Lin)</a>.  Please file any issues regarding the use of the snap to <a href=\"https://github.com/brlin-tw/featherpad-snap/issues\">the snap's own issue tracker</a>, thank you!<br><br><b>As the upstream project is not responsible to the snap distribution, please DO NOT file issue to the upstream project's issue tracker.</b><br><br>To silent this message run the following command in the terminal:<br><br>    <tt>sudo snap set ${SNAP_NAME} silent-unofficial-notice=yes</tt><br><br>" \
             --selectable-labels
 fi
 
