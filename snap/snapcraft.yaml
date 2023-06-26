@@ -195,6 +195,7 @@ parts:
 
     source: https://github.com/tsujan/FeatherPad.git
     source-depth: 75
+    source-tag: V0.16.0
     override-pull: |
       set -o nounset
 
